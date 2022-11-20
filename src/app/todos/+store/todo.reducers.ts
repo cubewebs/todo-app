@@ -4,20 +4,21 @@ import { Todo } from '../models/todo.model';
 import * as actions from './todo.actions';
 
 
-export const reducerFeatureKey = 'todo';
+export const reducerFeatureKey = 'todos';
+
+export interface AppState {
+    todos: Todo[],
+}
 
 
-export interface TodoState {
-	todo: Todo[];
-};
-
-export const todoInitialState: TodoState = {
-	todo: [],
-};
+export const todoInitialState: Todo[] = [
+	new Todo('Salvar el mundo'),
+	new Todo('Vencer a Thanos'),
+	new Todo('Comprar traje de Ironman'),
+	new Todo('Robar escudo de Capitan América'),
+];
 
 export const todoReducer = createReducer(
 	todoInitialState,
-on(actions.createTodo, (state, action) => (
-{ ...state, todo: [new Todo( action.text)] }
-)),
+on(actions.createTodo, (state, action) => [...state, new Todo( action.text )]),
 );

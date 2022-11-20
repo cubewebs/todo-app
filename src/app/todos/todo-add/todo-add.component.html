@@ -1,1 +1,1 @@
-<input class="new-todo" placeholder="What needs to be done?" autofocus>
+<input [formControl]="inputTxt" (keyup.enter)="addTodo()" class="new-todo" placeholder="What needs to be done?" autofocus>
