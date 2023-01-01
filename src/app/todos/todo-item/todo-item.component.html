@@ -1,18 +1,24 @@
-<li>
-
-	<ng-container  [class.completed]="todo?.complete">
+<li [class.completed]="todo.complete"
+	[class.editing]="isEditing"> 
+	<!--classes `editing` `compleated`-->
 
 		<div class="view">
+
 			<input class="toggle" 
 					type="checkbox" 
-					[formControl]="chkCompleted"
-					checked>
-			<label>{{todo?.text}}</label>
-			<button class="destroy"></button>
+					[formControl]="chkCompleted">
+
+			<label (dblclick)="edit()">{{todo.text}}</label>
+
+			<button class="destroy"
+					(click)="deleteTodo()"></button>
+
 		</div>
 		<input class="edit" 
-				[FormControl]="txtInput">
-
-	</ng-container>
+				type="text"
+				[formControl]="txtInput"
+				(blur)="editDone()"
+				(keyup.enter)="editDone()"
+				#editInput>
 	
 </li>

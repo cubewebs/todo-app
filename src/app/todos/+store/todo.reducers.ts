@@ -21,4 +21,43 @@ export const todoInitialState: Todo[] = [
 export const todoReducer = createReducer(
 	todoInitialState,
 on(actions.createTodo, (state, action) => [...state, new Todo( action.text )]),
+on(actions.checkmarkTodo, (state, { id }) => {
+
+	return state.map( todo => {
+
+		if(todo.id === id) {
+			return {
+				...todo,
+				complete: !todo.complete
+			}
+		} else {
+			return todo;
+		}
+
+	})
+	
+}),
+on(actions.editTodo, (state, { id, text }) => {
+
+	return state.map( todo => {
+
+		if(todo.id === id) {
+			return {
+				...todo,
+				text
+			}
+		} else {
+			return todo;
+		}
+
+	})
+
+}),
+on(actions.deleteTodo, (state, { id }) => state.filter( todo => todo.id !== id)),
+on(actions.toggleAllTodo, (state, { complete }) => state.map( todo => {
+	return {
+		...todo,
+		complete
+	}
+}) )
 );

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+
 import * as reducers from '../+store/todo.reducers';
 import { Todo } from '../models/todo.model';
-import * as selectors from '../+store/todo.selectors';
 
 @Component({
   selector: 'app-todo-list',
@@ -21,6 +21,7 @@ export class TodoListComponent implements OnInit {
 
     this.store.select('todos')
       .subscribe( todos => this.todos = todos );
+	  
   }
 
 }
