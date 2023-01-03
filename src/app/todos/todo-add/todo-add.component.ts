@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.reducer';
 import  * as actions from '../+store/todo.actions';
 import  * as reducers from '../+store/todo.reducers';
 import { Todo } from '../models/todo.model';
@@ -15,7 +16,7 @@ export class TodoAddComponent implements OnInit {
   inputTxt: FormControl;
 
   constructor(
-    private store: Store<reducers.AppState>
+    private store: Store<AppState>
   ) {
     this.inputTxt = new FormControl('', Validators.required)
   }

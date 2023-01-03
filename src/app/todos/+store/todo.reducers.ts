@@ -1,14 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
+import { Action } from 'rxjs/internal/scheduler/Action';
+import { FilterTypes } from '../models/filter.types';
+
 import { Todo } from '../models/todo.model';
 
 import * as actions from './todo.actions';
-
-
-export const reducerFeatureKey = 'todos';
-
-export interface AppState {
-    todos: Todo[],
-}
 
 
 export const todoInitialState: Todo[] = [
@@ -20,8 +16,8 @@ export const todoInitialState: Todo[] = [
 
 export const todoReducer = createReducer(
 	todoInitialState,
-on(actions.createTodo, (state, action) => [...state, new Todo( action.text )]),
-on(actions.checkmarkTodo, (state, { id }) => {
+	on(actions.createTodo, (state, action) => [...state, new Todo( action.text )]),
+	on(actions.checkmarkTodo, (state, { id }) => {
 
 	return state.map( todo => {
 
@@ -59,5 +55,7 @@ on(actions.toggleAllTodo, (state, { complete }) => state.map( todo => {
 		...todo,
 		complete
 	}
-}) )
+}) ),
+on(actions.cleanCompleted, (state) => state.filter( todo => !todo.complete)),
 );
+

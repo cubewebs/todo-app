@@ -4,6 +4,7 @@ import * as reducers from '../+store/todo.reducers';
 import * as fromActions from '../+store/todo.actions';
 import { Todo } from '../models/todo.model';
 import { FormControl, Validators } from '@angular/forms';
+import { AppState } from 'src/app/app.reducer';
 
 @Component({
   selector: 'app-todo-item',
@@ -21,7 +22,7 @@ export class TodoItemComponent implements OnInit {
   isEditing: boolean = false;
 
   constructor(
-    private store: Store<reducers.AppState>
+    private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {
